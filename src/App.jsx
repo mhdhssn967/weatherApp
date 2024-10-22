@@ -3,6 +3,9 @@ import './App.css';
 import sunImage from './assets/sun.png'; 
 import windImage from './assets/wind.png'
 import snowImage from './assets/snow.png'
+import bg from './assets/19V4.gif'
+import bg2 from './assets/19V5.gif'
+import bg3 from './assets/sunn.webp'
 
 function App() {
   const [city, setCity] = useState('');
@@ -27,6 +30,16 @@ function App() {
     }
   };
 
+  const setBG=(temp)=>{
+    if (temp > 30) {
+      return bg3; 
+    } else if (temp >= 15 && temp <= 30) {
+      return bg2; 
+    } else {
+      return bg; 
+    }
+  }
+
   const getWeatherIcon = (temp) => {
     if (temp > 30) {
       return sunImage; 
@@ -38,6 +51,7 @@ function App() {
   };
 
   return (
+    <>
     <div className="weather-app">
       <h1 className="app-title">Weather Forecast</h1>
 
@@ -53,6 +67,7 @@ function App() {
           Search
         </button>
       </div>
+      
 
       
 
@@ -83,9 +98,13 @@ function App() {
               <div>Wind Speed<h2>{weather.wind.speed} m/s</h2></div>
             </div>
           </div>
+          <div className='bg'><img src={setBG(weather.main.temp)} alt="" className='bgimg'/></div>
         </div>
-      )}
+        
+      )
+      }
     </div>
+    </>
   );
 }
 
